@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>序列号管理</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="main">
+        <h1>生成序列号</h1>
+        <select class="selectpicker" id="sel">
+            <option value="user">普通用户</option>
+            <option value="admin">管理员</option>
+            <option value="chinese">语文老师</option>
+            <option value="math">数学老师</option>
+            <option value="english">英语老师</option>
+            <option value="teacher">其他老师</option>
+        </select>
+        <button type="button" class="btn btn-default" onclick="addSerial()">生成序列号</button>
+        <button type="button" class="btn btn-default" onclick="getSerial()">刷新</button>
+
+        <body>
+            <table id="tab" class="table"></table>
+        </body>
+    </div>
+</body>
+
+<script type="text/javascript" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.js}"></script>
+<script th:inline="javascript">
+    getSerial()
+    function dateFormat(fmt, date) {
+        var date = new Date(date);
+        let ret;
+        const opt = {
+            "Y+": date.getFullYear().toString(),        // 年
+            "m+": (date.getMonth() + 1).toString(),     // 月
+            "d+": date.getDate().toString(),            // 日
+            "H+": date.getHours().toString(),           // 时
+            "M+": date.getMinutes().toString(),         // 分
+            "S+": date.getSeconds().toString()          // 秒
+            // 有其他格式化字符需求可以继续添加，必须转化成字符串
+        };
+        for (let k in opt) {
+            ret = new RegExp("(" + k + ")").exec(fmt);
+            if (ret) {
+                fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+            };
+        };
+        return fmt;
+    }
+    function addSerial(){
+        var sel = document.getElementById("sel")
+        var value = sel.options[sel.selectedIndex].value;
+        console.log(value)
+        $.get("/admin/serial/generate",{type:value},function(result){
+            console.log("请求完毕")
+            getSerial()
+        })
+    }
+    function getSerial(){
+        $.get("/admin/serial/all",function(result){
+            console.log(result);
+            var tableHtml =
+                "<caption>基本的表格布局</caption>\n" +
+                "<thead>\n" +
+                "<tr>\n" +
+                "  <th>秘钥</th>\n" +
+                "  <th>类型</th>\n" +
+                "  <th>日期</th>\n" +
+                "</tr>\n" +
+                "</thead>" +
+                "<tbody>"
+            for(var i in result){
+                tableHtml += "<tr>";
+                tableHtml +=    "<td>"+ result[i].serial +"</td>";
+                tableHtml +=    "<td>"+ result[i].type +"</td>";
+                tableHtml +=    "<td>"+ dateFormat("YYYY-mm-dd",result[i].date) +"</td>";
+                tableHtml += "</tr>";
+            }
+            tableHtml+="</tbody>"
+            console.log(tableHtml)
+            $("#tab").html(tableHtml);
+        })
+    }
+</script>
+<style>
+    .main{
+        margin: 20px 20px 10px 10px;
+    }
+</style>
+</html>

@@ -1,0 +1,14 @@
+2021-06-26 19:05:46.469 [restartedMain] INFO  com.qixiny.xihuaserver.XiHuaServerApplication - Starting XiHuaServerApplication using Java 1.8.0_291 on CN-202003141713 with PID 8604 (G:\Source Files\Java Files\XiHuaServer\target\classes started by Administrator in G:\Source Files\Java Files\XiHuaServer)
+2021-06-26 19:05:46.471 [restartedMain] INFO  com.qixiny.xihuaserver.XiHuaServerApplication - No active profile set, falling back to default profiles: default
+2021-06-26 19:05:46.518 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-26 19:05:46.518 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-26 19:05:47.515 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2021-06-26 19:05:47.522 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-26 19:05:47.523 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-26 19:05:47.523 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.48]
+2021-06-26 19:05:47.638 [restartedMain] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-26 19:05:47.639 [restartedMain] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1120 ms
+2021-06-26 19:05:48.199 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2021-06-26 19:05:48.218 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-26 19:05:48.242 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2021-06-26 19:05:48.251 [restartedMain] INFO  com.qixiny.xihuaserver.XiHuaServerApplication - Started XiHuaServerApplication in 2.269 seconds (JVM running for 3.969)

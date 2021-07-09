@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qixiny.xihuaserver.mapper.SerialMapper">
+    <cache/>
+    <select id="findAll" resultType="Serial">
+        select * from serial
+    </select>
+
+    <select id="findBy" resultType="Serial">
+        select * from serial where serial=#{serial}
+    </select>
+
+    <insert id="addSerial" parameterType="Serial">
+        insert into serial (serial, type, date) VALUES (#{serial},#{type},#{date})
+    </insert>
+    <delete id="deleteSerial" parameterType="Serial">
+        delete from serial where serial=#{serial}
+    </delete>
+</mapper>

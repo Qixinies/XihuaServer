@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qixiny.xihuaserver.mapper.UserMapper">
+    <cache/>
+    <select id="queryUserList" resultType="User">
+        select * from user
+    </select>
+
+    <select id="queryUserByOpenid" resultType="User">
+        select * from user where openid = #{openid}
+    </select>
+
+    <insert id="addUser" parameterType="User">
+        insert into user (openid,username,headImage,sessionKey,registerDate) values (#{openid},#{username},#{headImage},#{sessionKey},#{registerDate})
+    </insert>
+
+    <update id="updateUser" parameterType="User">
+        update user set username=#{username},sessionKey=#{sessionKey},headImage=#{headImage},type=#{type},officialName=#{officialName} where openid = #{openid}
+    </update>
+
+    <delete id="deleteUser" parameterType="User">
+        delete from user where openid = #{openid}
+    </delete>
+</mapper>
