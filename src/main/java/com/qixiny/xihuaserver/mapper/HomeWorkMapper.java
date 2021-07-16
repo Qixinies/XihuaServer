@@ -10,7 +10,10 @@ import java.util.List;
 @Repository
 public interface HomeWorkMapper {
     List<HomeWork> queryAllHomeWork();
+    List<HomeWork> queryHomeWorkByClassId(int id);
+
     HomeWork queryHomeWorkById(int id);
+
     int addHomeWork(HomeWork homeWork);
     int updateHomeWork(HomeWork homeWork);
     int deleteHomeWork(HomeWork homeWork);

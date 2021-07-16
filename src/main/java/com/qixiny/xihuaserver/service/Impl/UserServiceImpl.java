@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
         User user = findUserByID(openid);
         if(user==null){
             //TODO type 和 officeName为null
-            User newUser = new User(openid, userInfoMap.get("nickName"),userInfoMap.get("avatarUrl"), sessionKey,null,null,new Date());
+            User newUser = new User(openid, userInfoMap.get("nickName"),userInfoMap.get("avatarUrl"), sessionKey,null,null,new Date(),-1);
             addUser(newUser);
             Utils.logger.info(MessageFormat.format("{1}成功注册账号,id:{0}",newUser.getOpenid(),newUser.getUsername()));
         }

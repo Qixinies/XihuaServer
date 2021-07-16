@@ -20,7 +20,7 @@ public class User implements Serializable {
     //TODO 客户端更改职务
     private String type;
     private String officialName;
-
     private Date registerDate;
+    private int classId;
 
 }

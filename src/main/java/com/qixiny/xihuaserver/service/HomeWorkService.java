@@ -8,8 +8,9 @@ import java.util.List;
 
 public interface HomeWorkService {
     List<HomeWork> getHomeWorkList();
+    List<HomeWork> getHomeWorkListByClassID(int id);
     HomeWork getHomeWorkById(int id);
-    int addHomeWork(User user, String name, String description, Date startDate, Date endDate);
+    int addHomeWork(User user,int classID,String name, String description, Date startDate, Date endDate);
     int deleteHomeWork(int id);
 
 }

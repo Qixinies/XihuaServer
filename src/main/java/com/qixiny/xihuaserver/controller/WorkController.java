@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.rmi.CORBA.Util;
+
 @RestController
 @RequestMapping("/work")
 public class WorkController {
@@ -27,9 +29,17 @@ public class WorkController {
     }
 
     @GetMapping("/all")
-    public Result getAll(){
+    public Result getAll(@RequestHeader("Authorization") String token){
+        User user = userService.findUserByToken(token);
+        if (user == null) {
+            return Result.ClientError("输入token无效");
+        }
+        if (user.getClassId()==0 || user.getClassId()==-1){
+            return Result.success("你没加入团");
+        }
         try {
-            return Result.success("获取成功",homeWorkService.getHomeWorkList());
+            Utils.logger.info("用户获取作业，班级ID为："+user.getClassId());
+            return Result.success("获取成功",homeWorkService.getHomeWorkListByClassID(user.getClassId()));
         } catch (Exception e) {
             e.printStackTrace();
             return Result.ServerError("获取失败");
@@ -39,11 +49,20 @@ public class WorkController {
     @GetMapping("/addHomework")
     public Result addHomeWork(@RequestHeader("Authorization") String token, String name, String description, String startDate, String endDate){
         User user = userService.findUserByToken(token);
+        if (user == null) {
+            return Result.ClientError("输入token无效");
+        }
+
         if(user.getType().equals("user")){
             Utils.logger.warn("普通用户："+user.getOpenid()+"妄图创建作业");
             return Result.ClientError("你没有创建作业的权限");
         }
-        if (homeWorkService.addHomeWork(user, name, description, Utils.stringToDate(startDate), Utils.stringToDate(endDate))==1) {
+        if(user.getClassId()==0 || user.getClassId()==-1){
+            Utils.logger.warn("未添加团的用户："+user.getOpenid()+"妄图创建作业");
+            return Result.ClientError("你还没有加入团呢");
+        }
+
+        if (homeWorkService.addHomeWork(user,user.getClassId(), name, description, Utils.stringToDate(startDate), Utils.stringToDate(endDate))==1) {
             Utils.logger.info("用户添加作业成功！");
             return Result.success("添加成功");
         }

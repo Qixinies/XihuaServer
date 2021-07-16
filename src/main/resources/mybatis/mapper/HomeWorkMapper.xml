@@ -8,12 +8,16 @@
         select * from homework
     </select>
 
+    <select id="queryHomeWorkByClassId" resultType="HomeWork">
+        select * from homework where classId=#{id}
+    </select>
+
     <select id="queryHomeWorkById" resultType="HomeWork">
         select * from homework where id = #{id}
     </select>
 
     <insert id="addHomeWork" parameterType="HomeWork">
-        insert into homework (id, name, type,description, endDate, startDate, publisher) VALUES (#{id},#{name},#{type},#{description},#{endDate},#{startDate},#{publisher})
+        insert into homework (id, classId,name, type,description, endDate, startDate, publisher) VALUES (#{id},#{classId},#{name},#{type},#{description},#{endDate},#{startDate},#{publisher})
     </insert>
 
     <update id="updateHomeWork" parameterType="HomeWork">

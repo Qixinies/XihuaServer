@@ -17,7 +17,7 @@
     </insert>
 
     <update id="updateUser" parameterType="User">
-        update user set username=#{username},sessionKey=#{sessionKey},headImage=#{headImage},type=#{type},officialName=#{officialName} where openid = #{openid}
+        update user set username=#{username},sessionKey=#{sessionKey},headImage=#{headImage},classId=#{classId},type=#{type},officialName=#{officialName} where openid = #{openid}
     </update>
 
     <delete id="deleteUser" parameterType="User">

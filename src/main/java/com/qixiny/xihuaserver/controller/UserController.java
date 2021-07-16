@@ -75,8 +75,18 @@ public class UserController {
         if (user == null) {
             return  Result.ClientError("登陆失败");
         }
+        user.setSessionKey(null);
         return Result.success("获取成功",user);
 
+    }
+    @GetMapping("/getByOpenid")
+    public Result getUserByOpenid(String openid){
+        User user = userService.findUserByID(openid);
+        if (user == null) {
+            return Result.ClientError("无法查询到用户");
+        }
+        user.setSessionKey(null);
+        return Result.success("获取成功",user);
     }
 
     @GetMapping("/activateSerial")

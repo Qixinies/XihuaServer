@@ -35,18 +35,24 @@ public class HomeWorkServiceImpl implements HomeWorkService {
     }
 
     @Override
+    public List<HomeWork> getHomeWorkListByClassID(int id) {
+        return homeWorkMapper.queryHomeWorkByClassId(id);
+    }
+
+
+    @Override
     public HomeWork getHomeWorkById(int id) {
         return homeWorkMapper.queryHomeWorkById(id);
     }
 
     @Override
-    public int addHomeWork(User user, String name, String description, Date startDate, Date endDate) {
+    public int addHomeWork(User user,int classID,String name, String description, Date startDate, Date endDate) {
 
         String typeName = userService.getUserTypeString(user.getType());
         if (typeName == null) {
             return 0;
         }
-        HomeWork hw = new HomeWork(name,typeName,description,startDate,endDate,user.getUsername());
+        HomeWork hw = new HomeWork(name,classID,typeName,description,startDate,endDate,user.getOpenid());
         return homeWorkMapper.addHomeWork(hw);
     }
 
